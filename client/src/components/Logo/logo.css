@@ -1,0 +1,22 @@
+img{
+    width: 150px;
+    height: auto;
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    img{
+        width: 170px;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    img{
+        width: 190px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    img{
+        width: 210px;
+    }
+}
