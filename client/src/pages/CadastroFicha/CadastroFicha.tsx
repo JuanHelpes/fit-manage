@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import {
-    Box, AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemText,
+    Box, Typography, IconButton,
     TextField, MenuItem, Button, Card, CardContent, Divider, Grid, Select, InputLabel, FormControl
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { motion } from "framer-motion";
@@ -58,7 +57,6 @@ const treinoColors: Record<string, string> = {
 };
 
 const CadastroFicha: React.FC = () => {
-    const [openDrawer, setOpenDrawer] = useState(false);
     const [grupos, setGrupos] = useState<Grupo[]>(gruposPadrao);
     const [fichaInfo, setFichaInfo] = useState({
         aluno: "",
@@ -99,33 +97,7 @@ const CadastroFicha: React.FC = () => {
 
     return (
         <Box sx={{ display: "flex", minHeight: "100vh", width: "100%", bgcolor: "#fafafa" }}>
-            {/* Drawer lateral */}
-            <Drawer anchor="left" open={openDrawer} onClose={() => setOpenDrawer(false)}>
-                <Box sx={{ width: 250, p: 2 }}>
-                    <Typography variant="h6" gutterBottom>Menu</Typography>
-                    <List>
-                        {["Início", "Cadastrar Ficha", "Histórico", "Alunos", "Configurações", "Sair"].map((text) => (
-                            <ListItem key={text}>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))}
-                    </List>
-                </Box>
-            </Drawer>
-
             <Box sx={{ flexGrow: 1 }}>
-                {/* AppBar */}
-                <AppBar position="static" sx={{ bgcolor: "#ff6f00" }}>
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit" onClick={() => setOpenDrawer(true)}>
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                            Cadastrar Ficha
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-
                 <Box sx={{ p: 3 }}>
                     {/* Cabeçalho da ficha */}
                     <Card sx={{ mb: 4 }}>

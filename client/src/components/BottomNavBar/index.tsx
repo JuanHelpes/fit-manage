@@ -3,6 +3,7 @@ import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import RestoreIcon from "@mui/icons-material/Restore";
 import PersonIcon from "@mui/icons-material/Person";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import { useNavigate, useLocation } from "react-router-dom";
 
 const BottomNavBar: React.FC = () => {
@@ -57,6 +58,11 @@ const BottomNavBar: React.FC = () => {
           label="Histórico"
           value="/history"
           icon={<RestoreIcon />}
+        />
+        <BottomNavigationAction
+          label="Evolução"
+          value="/InfosUser"
+          icon={<FitnessCenterIcon />}
         />
         <BottomNavigationAction
           label="Perfil"

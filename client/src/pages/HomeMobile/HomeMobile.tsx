@@ -1,10 +1,10 @@
 import Container from "@mui/material/Container";
 import BottomNavBar from "../../components/BottomNavBar";
-import Ficha from "../../components/Ficha";
+import Ficha from "../../components/Ficha/Ficha";
 import { Box, Typography } from "@mui/material";
 
 
-const Home: React.FC = () => {
+const HomeMobile: React.FC = () => {
     return (
         <Container sx={{
             m: 0,
@@ -39,4 +39,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default HomeMobile;
