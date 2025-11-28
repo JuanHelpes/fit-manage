@@ -44,7 +44,8 @@ const HomePage: React.FC = () => {
             sx={{
                 p: 3,
                 bgcolor: "#fafafa",
-                minHeight: "100vh",
+                height: "100%",
+                
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",

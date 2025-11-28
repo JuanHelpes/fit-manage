@@ -30,7 +30,7 @@ const HeaderDesktop: React.FC = () => {
     const titulo = routeTitles[location.pathname] || "Aplicação";
 
     const menuItems = [
-        { text: "Início", path: "/inicio" },
+        { text: "Início", path: "/" },
         { text: "Cadastrar Ficha", path: "/cadastro-ficha" },
         { text: "Dashboard", path: "/dashboard" },
         // { text: "Alunos", path: "/alunos" },

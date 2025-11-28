@@ -26,7 +26,7 @@ function App() {
         <Router>
           <Routes>
             {/* Páginas públicas (sem navbar) */}
-            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             {/* Páginas com layout (header incluída) */}
             <Route element={<AppLayoutHeader />}>
@@ -34,7 +34,7 @@ function App() {
               <Route path="/alunos" element={<ListaAlunos />} />
               <Route path="/dashboard" element={<DashboardPersonal />} />
               <Route path="/configuracoes" element={<ConfiguracoesPersonal />} />
-              <Route path="/inicio" element={<HomeDesktop />} />
+              <Route path="/" element={<HomeDesktop />} />
             </Route>
             {/* Páginas com layout (navbar incluída) */}
             <Route element={<AppLayout />}>
