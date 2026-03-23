@@ -1,19 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { CreateInstrutorDto } from './dto/create-instrutor.dto';
 import { UpdateInstrutorDto } from './dto/update-instrutor.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class InstrutorService {
-  create(createInstrutorDto: CreateInstrutorDto) {
-    return 'This action adds a new instrutor';
+  constructor(private readonly prisma: PrismaService) {}
+    
+  async create(createInstrutorDto: CreateInstrutorDto) {
+        const data = { 
+          ...createInstrutorDto,
+          senha_hash: await bcrypt.hash(createInstrutorDto.senha_hash, 10)
+        };
+    
+        const createdInstrutor = await this.prisma.instrutor.create({
+          data
+        })
+    
+        return {
+          ...createdInstrutor,
+          senha_hash: undefined
+        }; 
   }
 
   findAll() {
     return `This action returns all instrutor`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} instrutor`;
+  findByEmail(email: string) {
+    return this.prisma.instrutor.findUnique({
+      where: {
+        email
+      }
+    });
   }
 
   update(id: number, updateInstrutorDto: UpdateInstrutorDto) {

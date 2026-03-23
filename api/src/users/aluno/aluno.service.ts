@@ -6,10 +6,10 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AlunoService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async create(createAlunoDto: CreateAlunoDto) {
-    const data = { 
+    const data = {
       ...createAlunoDto,
       senha_hash: await bcrypt.hash(createAlunoDto.senha_hash, 10)
     };
@@ -21,11 +21,16 @@ export class AlunoService {
     return {
       ...createdAluno,
       senha_hash: undefined
-    }; 
+    };
   }
 
   findAll() {
-    return `This action returns all aluno`;
+    return this.prisma.aluno.findMany({
+      select: {
+        id: true,
+        nome: true,
+      },
+    });
   }
 
   findByEmail(email: string) {

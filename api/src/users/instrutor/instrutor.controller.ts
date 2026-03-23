@@ -17,9 +17,9 @@ export class InstrutorController {
     return this.instrutorService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.instrutorService.findOne(+id);
+  @Get(':email')
+  findOne(@Param('email') email: string) {
+    return this.instrutorService.findByEmail(email);
   }
 
   @Patch(':id')
