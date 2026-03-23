@@ -13,7 +13,6 @@ export class AuthService  {
 
   login(user: User): UserToken {
     // Transforma o user em um JWT token
-
     const payload: UserPayload = {
       sub: user.id,
       email: user.email,
@@ -24,8 +23,6 @@ export class AuthService  {
     const jwtToken = this.jwtService.sign(payload);
 
     return { access_token: jwtToken, };
-
-    throw new Error('Method not implemented.');
   }
 
   async validateUser(email: string, password: string, role: 'aluno' | 'instrutor') {
@@ -46,7 +43,19 @@ export class AuthService  {
         }
       }
       if (role === 'instrutor') {
-        // Implementar a lógica de autenticação para instrutor
+        const user = await this.instrutorService.findByEmail(email);
+
+        if(user){
+          const isPasswordValid = await bcrypt.compare(password, user.senha_hash);
+
+          if (isPasswordValid) {
+            return {
+              ...user,
+              senha_hash: undefined,
+              role: 'instrutor',
+            }
+          }
+        }
       }
 
       throw new Error('Email address or password provided is incorrect.');
