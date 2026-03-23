@@ -1,19 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthProvider";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { AuthProvider } from "./context/AuthProvider";
 
-import UserProfilePage from "./pages/UserProfile/UserProfile";
+import CadastroFicha from "./pages/CadastroFicha/CadastroFicha";
+import HistoryPage from "./pages/History/History";
+import HomeMobile from "./pages/HomeMobile/HomeMobile";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import HomeMobile from "./pages/HomeMobile/HomeMobile";
-import AppLayout from "./layouts/AppLayout";
-import HistoryPage from "./pages/History/History";
-import CadastroFicha from "./pages/CadastroFicha/CadastroFicha";
+import UserProfilePage from "./pages/UserProfile/UserProfile";
 
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ListaAlunos from "./pages/Alunos/ListaAlunos";
-import AppLayoutHeader from "./layouts/AppLayoutHeader";
-import DashboardPersonal from "./pages/DashboardPersonal/DashboardPersonal";
 import ConfiguracoesPersonal from "./pages/ConfigPersonal/ConfigPersonal";
+import DashboardPersonal from "./pages/DashboardPersonal/DashboardPersonal";
 import HomeDesktop from "./pages/HomeDesktop/HomeDesktop";
 import InfosUser from "./pages/InfosUser/InfosUser";
 
@@ -26,18 +25,18 @@ function App() {
         <Router>
           <Routes>
             {/* Páginas públicas (sem navbar) */}
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             {/* Páginas com layout (header incluída) */}
-            <Route element={<AppLayoutHeader />}>
+            <Route element={<ProtectedRoute allowedRoles={['instrutor']} />}>
               <Route path="/cadastro-ficha" element={<CadastroFicha />} />
               <Route path="/alunos" element={<ListaAlunos />} />
               <Route path="/dashboard" element={<DashboardPersonal />} />
               <Route path="/configuracoes" element={<ConfiguracoesPersonal />} />
-              <Route path="/" element={<HomeDesktop />} />
+              <Route path="/home-desktop" element={<HomeDesktop />} />
             </Route>
             {/* Páginas com layout (navbar incluída) */}
-            <Route element={<AppLayout />}>
+            <Route element={<ProtectedRoute allowedRoles={['aluno']} />}>
               <Route path="/home" element={<HomeMobile />} />
               <Route path="/user" element={<UserProfilePage />} />
               <Route path="/history" element={<HistoryPage />} />
