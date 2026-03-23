@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import { AuthContext } from "../../context/AuthProvider";
 
 const HomePage: React.FC = () => {
     const navigate = useNavigate();
+    const { user } = React.useContext(AuthContext);
 
     const resumo = {
         alunos: 24,
@@ -44,7 +46,7 @@ const HomePage: React.FC = () => {
             sx={{
                 p: 3,
                 bgcolor: "#fafafa",
-                height: "100%",
+                
                 
                 display: "flex",
                 flexDirection: "column",
@@ -53,7 +55,7 @@ const HomePage: React.FC = () => {
         >
             {/* Boas-vindas */}
             <Typography variant="h4" fontWeight="bold" sx={{ mb: 1, color: "#ff6f00" }}>
-                Bem-vindo de volta, Personal!
+                Bem-vindo de volta, Instrutor!
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
                 Acompanhe seus alunos e organize seus treinos com eficiência.

@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Logout, Edit } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
+import { AuthContext } from "../../context/AuthProvider";
 
 interface UserProfileProps {
     user: {
@@ -40,16 +41,26 @@ const UserProfile: React.FC = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-    const user = { name: "Juan", email: "juan@gmail.com", isGoogleUser: false, icon: "🔥" };
-    const [name, setName] = useState(user.name);
+    const userIcon = { isGoogleUser: false, icon: "🔥" };
+    const { user, token, logout } = React.useContext(AuthContext);
+    const [name, setName] = useState(user?.name || "");
     const [password, setPassword] = useState("");
-    const [icon, setIcon] = useState(user.icon);
+    const [icon, setIcon] = useState(userIcon.icon);
     const [editingIcon, setEditingIcon] = useState(false);
+ 
 
     // const handleSave = () => {
     //     const updated = { name, icon, ...((!user.isGoogleUser && password) ? { password } : {}) };
     //     // onSave(updated);
     // };
+
+        const onLogout = () => {
+        // Limpar estado de autenticação
+        logout();
+        // Redirecionar para a página de login
+        window.location.href = '/';
+    }
+
 
     return (
         <Container
@@ -148,7 +159,7 @@ const UserProfile: React.FC = () => {
                     }}
                 />
 
-                {!user.isGoogleUser && (
+                {!userIcon.isGoogleUser && (
                     <TextField
                         label="Nova Senha"
                         type="password"
@@ -179,7 +190,7 @@ const UserProfile: React.FC = () => {
                 <Button
                     variant="outlined"
                     startIcon={<Logout />}
-                    // onClick={onLogout}
+                    onClick={onLogout}
                     sx={{
                         mt: 2,
                         borderColor: "#000",

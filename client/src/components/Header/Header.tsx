@@ -13,10 +13,12 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 
 const HeaderDesktop: React.FC = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
     const navigate = useNavigate();
+    const { logout } = React.useContext(AuthContext);
 
     // Define os títulos baseados nas rotas
     const routeTitles: Record<string, string> = {
@@ -30,7 +32,7 @@ const HeaderDesktop: React.FC = () => {
     const titulo = routeTitles[location.pathname] || "Aplicação";
 
     const menuItems = [
-        { text: "Início", path: "/" },
+        { text: "Início", path: "/home-desktop" },
         { text: "Cadastrar Ficha", path: "/cadastro-ficha" },
         { text: "Dashboard", path: "/dashboard" },
         // { text: "Alunos", path: "/alunos" },
@@ -38,7 +40,7 @@ const HeaderDesktop: React.FC = () => {
 
     const userItems = [
         { text: "Configurações", path: "/configuracoes" },
-        { text: "Sair", path: "/logout" },
+        { text: "Sair", onClick: () => logout() },
     ];
 
     return (
@@ -73,7 +75,11 @@ const HeaderDesktop: React.FC = () => {
 
                                 key={item.text}
                                 onClick={() => {
-                                    navigate(item.path);
+                                    if (item.onClick) {
+                                        item.onClick();
+                                    } else {
+                                        navigate(item.path? item.path : "/");
+                                    }
                                     setOpenDrawer(false);
                                 }}
                             >
