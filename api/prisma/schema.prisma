@@ -21,6 +21,9 @@ model Aluno {
   senha_hash String
   idade     Int?
   login_google Boolean  @default(false)
+  fichas    Ficha[]
+  evolucoes EvolucaoFisica[]
+  alertas   Alerta[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -34,6 +37,7 @@ model Instrutor {
   especialidade String?
   telefone String?
   horario_atendimento String?
+  fichas    Ficha[]
   login_google Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -41,6 +45,7 @@ model Instrutor {
 
 model Alerta {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  aluno   Aluno   @relation(fields: [alunoId], references: [id])
   alunoId String   @db.ObjectId
   mensagem  String
   lido    Boolean  @default(false)
@@ -51,6 +56,7 @@ model Alerta {
 
 model EvolucaoFisica {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  aluno   Aluno   @relation(fields: [alunoId], references: [id])
   alunoId   String   @db.ObjectId
   dataRegistro DateTime @default(now())
   peso      Float
@@ -64,7 +70,9 @@ model EvolucaoFisica {
 
 model Ficha {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  aluno   Aluno   @relation(fields: [alunoId], references: [id])
   alunoId   String   @db.ObjectId
+  instrutor Instrutor @relation(fields: [instrutorId], references: [id])
   instrutorId String   @db.ObjectId
   objetivo  String
   ativa    Boolean  @default(true)
@@ -73,4 +81,5 @@ model Ficha {
   treinos Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
 }
