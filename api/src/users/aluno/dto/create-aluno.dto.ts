@@ -12,7 +12,7 @@ import {
 
 export class CreateAlunoDto {
     @IsEmail()
-    email: string;
+    email!: string;
 
     @IsString()
     @MinLength(4)
@@ -20,10 +20,10 @@ export class CreateAlunoDto {
     @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
         message: 'password too weak',
     })
-    senha_hash: string;
+    senha_hash!: string;
 
     @IsString()
-    nome: string;
+    nome!: string;
 
     @IsNumber()
     @IsOptional()

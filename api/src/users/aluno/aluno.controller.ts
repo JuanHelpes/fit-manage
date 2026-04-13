@@ -17,6 +17,16 @@ export class AlunoController {
     return this.alunoService.findAll();
   }
 
+  @Get('quantity')
+  quantity() {
+    return this.alunoService.quantity();
+  }
+
+  @Get('ficha')
+  findAlunosFicha() {
+    return this.alunoService.findAlunosFicha();
+  }
+
   @Get(':email')
   findByEmail(@Param('email') email: string) {
     return this.alunoService.findByEmail(email);

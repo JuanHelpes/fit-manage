@@ -11,10 +11,10 @@ import {
 
 export class CreateInstrutorDto {
     @IsString()
-    nome
+    nome!: string
 
     @IsEmail()
-    email
+    email!: string
 
     @IsString()
     @MinLength(4)
@@ -22,7 +22,7 @@ export class CreateInstrutorDto {
     @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
         message: 'password too weak',
     })
-    senha_hash
+    senha_hash!: string
 
     @IsString()
     @IsOptional()
