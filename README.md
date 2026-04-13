@@ -92,7 +92,7 @@ Ele demonstra habilidades como:
 - Desenvolvimento de APIs escaláveis com NestJS
 - Integração eficiente entre frontend e backend
 - Organização de código e arquitetura modular
-- Uso de ORM com banco NoSQL (MongoDB)
+- Uso de ORM (Prisma) com banco NoSQL (MongoDB)
 
 ---
 

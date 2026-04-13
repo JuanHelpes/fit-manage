@@ -14,6 +14,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum TipoAlerta {
+  AUTOMATICO
+  MANUAL
+}
+
 model Aluno {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   nome      String
@@ -44,14 +49,17 @@ model Instrutor {
 }
 
 model Alerta {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  aluno   Aluno   @relation(fields: [alunoId], references: [id])
-  alunoId String   @db.ObjectId
-  mensagem  String
-  lido    Boolean  @default(false)
-  data_alerta DateTime @default(now())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  aluno       Aluno      @relation(fields: [alunoId], references: [id])
+  alunoId     String     @db.ObjectId
+  ficha       Ficha?     @relation(fields: [fichaId], references: [id])
+  fichaId     String?    @db.ObjectId
+  tipo        TipoAlerta @default(MANUAL)
+  mensagem    String
+  lido        Boolean    @default(false)
+  data_alerta DateTime   @default(now())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 model EvolucaoFisica {
@@ -79,6 +87,7 @@ model Ficha {
   data_inicio DateTime @default(now())
   data_fim  DateTime
   treinos Json
+  alertas   Alerta[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
